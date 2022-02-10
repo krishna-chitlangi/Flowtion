@@ -1,12 +1,16 @@
 import React from 'react';
+import CustomNode from './CustomNode';
 
 import Reactflowdnd from './Reactflow';
-
-
+import Form from './Form'
 const Home = () => {
     return (
         <div>
-            <Reactflowdnd></Reactflowdnd>
+
+            <Form></Form>
+            {/* <CustomNode />
+            <CustomNode /> */}
+
         </div>
     );
 };

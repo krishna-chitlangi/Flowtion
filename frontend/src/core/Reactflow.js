@@ -4,6 +4,7 @@ import ReactFlow, {
     addEdge,
     removeElements,
     Controls,
+    getIncomers,
 } from 'react-flow-renderer';
 import Sidebar from './Sidebar';
 import './dnd.css';
@@ -33,7 +34,9 @@ const Reactflowdnd = () => {
         event.preventDefault();
         event.dataTransfer.dropEffect = 'move';
     };
-
+    // const getParent = () => {
+    //     getIncomers
+    // }
     const onDrop = (event) => {
         event.preventDefault();
 
