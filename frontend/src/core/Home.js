@@ -1,13 +1,15 @@
 import React from 'react';
-
-import Reactflowdnd from './Reactflow';
-
-
+import ReactFlowRenderer from '../react-flow-renderer';
+import Layout from './Layout'
 const Home = () => {
     return (
-        <div>
-            <Reactflowdnd></Reactflowdnd>
-        </div>
+        <Layout 
+            title="Add a flowchart"
+            description=""
+            className="container col-md-8 offset-md-2"
+        >
+            <ReactFlowRenderer />
+        </Layout>
     );
 };
 
