@@ -44,7 +44,7 @@ const Showflow = () => {
                 return (<div key={i}>
 
                     <button key={i} value={fc._id} onClick={(e) => handleClick(e)}>
-                        {fc._id}
+                        {fc.name}
 
                     </button>
                     <br></br>

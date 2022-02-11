@@ -31,7 +31,7 @@ const read = async (req, res) => {
 const readAll = async (req, res) => {
     try {
 
-        const fc = await Flowchart.find().select("_id")
+        const fc = await Flowchart.find().select("name")
         if (!fc) {
             throw new Error("flowchart not found")
         }

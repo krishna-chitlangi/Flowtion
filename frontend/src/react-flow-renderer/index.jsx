@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { withRouter } from "react-router-dom";
 import "./styles.css";
 import ReactFlow, {
   removeElements,
@@ -12,10 +13,12 @@ import { saveFlow } from "./apiUser";
 
 import { nodeTypes } from "./Nodes";
 
-const ReactFlowRenderer = () => {
+const ReactFlowRenderer = (props) => {
   const [elements, setElements] = useState([]);
 
   const [name, setName] = useState("");
+  const [flowname, setflowName] = useState("");
+  const [catname, setcatName] = useState("");
   const [activeNode, setActiveNode] = useState();
   const [newName, setNewName] = useState("");
   const [instance, setInstance] = useState();
@@ -143,103 +146,130 @@ const ReactFlowRenderer = () => {
   };
 
   const saveChangesHandler = () => {
-
     let x = {}
     x["nodes"] = instance.getElements()
+    x["name"] = flowname
+    x["category"] = catname
     saveFlow(JSON.stringify(x))
       .then(data => {
         if (data.error) {
 
         } else {
           console.log(data)
+          props.history.push('/')
         }
       });
   };
 
   return (
-    <div
-      style={{
-        height: "75vh",
-        width: "75vw",
-        border: "1px solid black",
-        marginLeft: "12.5vw"
-      }}
-    >
-      <ReactFlow
-        elements={elements}
-        onElementsRemove={elementRemoveHandler}
-        onConnect={connectHandler}
-        deleteKeyCode={8 || 46}
-        onEdgeUpdate={edgeUpdateHandler}
-        nodeTypes={nodeTypes}
-        snapToGrid={true}
-        snapGrid={[16, 16]}
-        connectionLineStyle={{ stroke: "black", strokeWidth: 2 }}
-        onDoubleClick={clickHandler}
-        onLoad={onLoad}
+    <div><div>
+      <label>Enter name of your flowchart :</label>
+      <input
+        value={flowname}
+        onChange={(e) => setflowName(e.target.value)}
+        type="text"
+        placeholder="flowchart name"
+      />
+      <br>
+      </br>
+      <br></br>
+      <label>Enter the category  : </label>
+      <input
+        value={catname}
+        onChange={(e) => setcatName(e.target.value)}
+        type="text"
+        placeholder="category"
+      />
+
+    </div>
+      <br>
+      </br>
+      <br></br>
+      <div
+        style={{
+          height: "75vh",
+          width: "75vw",
+          border: "1px solid black",
+          marginLeft: "12.5vw"
+        }}
       >
-        <Background variant="dots" gap={15} size={2} color="#c8c8c8" />
 
-        <MiniMap
-          nodeColor={(node) => {
-            switch (node.type) {
-              case "rectangle":
-                return "red";
-              case "circle":
-                return "#00ff00";
-              case "triangle":
-                return "rgb(0,0,255)";
-              default:
-                return "#eee";
-            }
-          }}
-        />
+        <ReactFlow
+          elements={elements}
+          onElementsRemove={elementRemoveHandler}
+          onConnect={connectHandler}
+          deleteKeyCode={8 || 46}
+          onEdgeUpdate={edgeUpdateHandler}
+          nodeTypes={nodeTypes}
+          snapToGrid={true}
+          snapGrid={[16, 16]}
+          connectionLineStyle={{ stroke: "black", strokeWidth: 2 }}
+          onDoubleClick={clickHandler}
+          onLoad={onLoad}
+        >
+          <Background variant="dots" gap={15} size={2} color="#c8c8c8" />
 
-        <Controls />
-      </ReactFlow>
+          <MiniMap
+            nodeColor={(node) => {
+              switch (node.type) {
+                case "rectangle":
+                  return "red";
+                case "circle":
+                  return "#00ff00";
+                case "triangle":
+                  return "rgb(0,0,255)";
+                default:
+                  return "#eee";
+              }
+            }}
+          />
 
-      <div>
-        <input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          type="text"
-          placeholder="Enter new node name"
-        />
+          <Controls />
+        </ReactFlow>
 
-        <button type="button" onClick={addRectangleHandler}>
-          Create Rectangle
-        </button>
+        <div>
+          <input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            type="text"
+            placeholder="Enter new node name"
+          />
 
-        <button type="button" onClick={addCircleHandler}>
-          Create Circle
-        </button>
+          <button type="button" onClick={addRectangleHandler}>
+            Create Rectangle
+          </button>
 
-        <button type="button" onClick={addTriangleHandler}>
-          Create Triangle
-        </button>
+          <button type="button" onClick={addCircleHandler}>
+            Create Circle
+          </button>
+          <button type="button" onClick={addCircleHandler}>
+            Create Parallelogram
+          </button>
+          <button type="button" onClick={addCircleHandler}>
+            Create rhombus
+          </button>
 
-        <button type="button" onClick={addTextHandler}>
-          Plain text
+        </div>
+
+
+        <div>
+          <input
+            value={newName}
+            onChange={(e) => setNewName(e.target.value)}
+            type="text"
+          />
+
+          <button type="button" onClick={updateNodeHandler}>
+            Update
+          </button>
+        </div>
+
+        <button type="button" onClick={saveChangesHandler}>
+          Save changes
         </button>
       </div>
-
-      <div>
-        <input
-          value={newName}
-          onChange={(e) => setNewName(e.target.value)}
-          type="text"
-        />
-
-        <button type="button" onClick={updateNodeHandler}>
-          Update
-        </button>
-      </div>
-
-      <button type="button" onClick={saveChangesHandler}>
-        Save changes
-      </button>
     </div>
   );
 };
 
-export default ReactFlowRenderer;
+export default withRouter(ReactFlowRenderer);

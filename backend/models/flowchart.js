@@ -6,6 +6,14 @@ const flowchartSchema = new mongoose.Schema({
     nodes: {
         type: Array,
         default: [],
+    },
+    name: {
+        type: String,
+        default: "my flowchart"
+    },
+    category: {
+        type: String,
+        default: "category default"
     }
 }, {
     timestamps: true
