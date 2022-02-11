@@ -2,15 +2,15 @@ const express = require('express')
 const auth = require('../middleware/auth')
 const isAdmin = require('../middleware/isAdmin')
 const isAuth = require('../middleware/isAuth')
-const { add, read, deleteflow } = require('../controllers/flowchart')
+const { saveflow, read, readAll } = require('../controllers/flowchart')
 const router = new express.Router()
 
-router.post('/addflowchart', auth, isAuth, isAdmin, add)
-router.get('/flowchart/:id', auth, isAuth, read)
-router.delete('/delete/:id', auth, isAuth, isAdmin, deleteflow)
+router.post('/saveflow', saveflow)
+router.get('/read/:id', read)
+// router.delete('/delete/:id', auth, isAuth, isAdmin, deleteflow)
 
+router.get('/readAll', readAll)
 
-
-router.param("id", flowchartbyId)
+// router.param("id", flowchartbyId)
 
 module.exports = router

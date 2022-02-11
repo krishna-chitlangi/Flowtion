@@ -2,6 +2,7 @@ const morgan = require('morgan')
 const express = require('express')
 const mongoose = require('mongoose')
 const userRoutes = require('./routes/user')
+const flowRoutes = require('./routes/flowchart')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 require('dotenv').config()
@@ -18,6 +19,8 @@ app.use(express.json({ limit: '50mb' }))
 app.use(express.urlencoded({ limit: '50mb' }))
 app.use(express.json())
 app.use('/api', userRoutes)
+app.use('/api', flowRoutes)
+
 const port = process.env.PORT || 8000
 
 app.listen(port, () => {

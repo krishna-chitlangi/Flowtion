@@ -143,15 +143,17 @@ const ReactFlowRenderer = () => {
   };
 
   const saveChangesHandler = () => {
-    console.log("current state", instance.getElements());
-    saveFlow(instance.getElements())
-            .then(data => {
-                if (data.error) {
-                   
-                } else {
-                    
-                }
-            });
+
+    let x = {}
+    x["nodes"] = instance.getElements()
+    saveFlow(JSON.stringify(x))
+      .then(data => {
+        if (data.error) {
+
+        } else {
+          console.log(data)
+        }
+      });
   };
 
   return (
