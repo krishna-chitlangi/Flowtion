@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import "./styles.css";
+
 import ReactFlow, {
   removeElements,
   updateEdge,
@@ -53,11 +53,11 @@ const ReactFlowRenderer = (props) => {
     setName("");
   };
 
-  const addCircleHandler = () => {
+  const addParalellogramHandler = () => {
     const newNode = {
       id: `${Date.now()}`,
       data: { label: `${name}` },
-      type: "circle",
+      type: "paraNode",
       position: {
         x: 0,
         y: 0
@@ -71,11 +71,11 @@ const ReactFlowRenderer = (props) => {
     setName("");
   };
 
-  const addTriangleHandler = () => {
+  const addStartHandler = () => {
     const newNode = {
       id: `${Date.now()}`,
       data: { label: `${name}` },
-      type: "triangle",
+      type: "startNode",
       position: {
         x: 0,
         y: 0
@@ -89,11 +89,11 @@ const ReactFlowRenderer = (props) => {
     setName("");
   };
 
-  const addTextHandler = () => {
+  const addEndHandler = () => {
     const newNode = {
       id: `${Date.now()}`,
       data: { label: `${name}` },
-      type: "text",
+      type: "endNode",
       position: {
         x: 0,
         y: 0
@@ -106,6 +106,7 @@ const ReactFlowRenderer = (props) => {
     });
     setName("");
   };
+
 
   const edgeUpdateHandler = (oldEdge, newConnection) =>
     setElements((els) => updateEdge(oldEdge, newConnection, els));
@@ -170,8 +171,7 @@ const ReactFlowRenderer = (props) => {
         type="text"
         placeholder="flowchart name"
       />
-      <br>
-      </br>
+      <br></br>
       <br></br>
       <label>Enter the category  : </label>
       <input
@@ -182,8 +182,7 @@ const ReactFlowRenderer = (props) => {
       />
 
     </div>
-      <br>
-      </br>
+      <br></br>
       <br></br>
       <div
         style={{
@@ -214,10 +213,12 @@ const ReactFlowRenderer = (props) => {
               switch (node.type) {
                 case "rectangle":
                   return "red";
-                case "circle":
+                case "startNode":
                   return "#00ff00";
-                case "triangle":
+                case "endNode":
                   return "rgb(0,0,255)";
+                case "paraNode":
+                  return "rgb(120,120,120)"
                 default:
                   return "#eee";
               }
@@ -234,19 +235,17 @@ const ReactFlowRenderer = (props) => {
             type="text"
             placeholder="Enter new node name"
           />
-
+          <button type="button" onClick={addStartHandler}>
+            Create Start Node
+          </button>
           <button type="button" onClick={addRectangleHandler}>
             Create Rectangle
           </button>
-
-          <button type="button" onClick={addCircleHandler}>
-            Create Circle
+          <button type="button" onClick={addParalellogramHandler}>
+            Create Paralellogram
           </button>
-          <button type="button" onClick={addCircleHandler}>
-            Create Parallelogram
-          </button>
-          <button type="button" onClick={addCircleHandler}>
-            Create rhombus
+          <button type="button" onClick={addEndHandler}>
+            Create End Node
           </button>
 
         </div>

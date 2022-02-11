@@ -31,7 +31,7 @@ const read = async (req, res) => {
 const readAll = async (req, res) => {
     try {
 
-        const fc = await Flowchart.find().select("name")
+        const fc = await Flowchart.find()
         if (!fc) {
             throw new Error("flowchart not found")
         }
@@ -45,4 +45,23 @@ const readAll = async (req, res) => {
 
     }
 }
-module.exports = { read, readAll, saveflow }
+
+
+const readAllCat = async (req, res) => {
+    try {
+
+        const fc = await Flowchart.find().select("category")
+        if (!fc) {
+            throw new Error("flowchart not found")
+        }
+        res.status(200).send(fc)
+
+
+    } catch (e) {
+        return res.status(400).json({
+            error: e
+        })
+
+    }
+}
+module.exports = { read, readAll,readAllCat, saveflow }
