@@ -6,16 +6,16 @@ const RectangleNode = ({ data }) => {
     <div style={{ background: "#9ca8b3", padding: "1rem" }}>
       <Handle
         type="target"
-        position="left"
-        id={`${data.id}.left`}
+        position="top"
+        id={`${data.id}.top`}
         style={{ borderRadius: 0 }}
       />
       <div id={data.id}>{data.label}</div>
       <Handle
         type="source"
-        position="right"
-        id={`${data.id}.right1`}
-        style={{ top: "50%", borderRadius: 0 }}
+        position="bottom"
+        id={`${data.id}.bottom`}
+        style={{ borderRadius: 0 }}
       />
     </div>
   );
@@ -23,20 +23,22 @@ const RectangleNode = ({ data }) => {
 
 const ParaNode = ({ data }) => {
   return (
-    <div style={{ background: "#9ca8b3", padding: "1rem",
-    transform: "skew(20deg)" }}>
+    <div style={{
+      background: "#9ca8b3", padding: "1rem",
+      transform: "skew(155deg)"
+    }}>
       <Handle
         type="target"
-        position="left"
-        id={`${data.id}.left`}
+        position="top"
+        id={`${data.id}.top`}
         style={{ borderRadius: 0 }}
       />
       <div id={data.id}>{data.label}</div>
       <Handle
         type="source"
-        position="right"
-        id={`${data.id}.right1`}
-        style={{ top: "50%", borderRadius: 0 }}
+        position="bottom"
+        id={`${data.id}.bottom`}
+        style={{ borderRadius: 0 }}
       />
     </div>
   );
@@ -47,15 +49,15 @@ const StartNode = ({ data }) => {
   return (
     <div
       style={{
-        background: "#9ca8b3", padding: "1rem",borderRadius:'50%'
+        background: "#9ca8b3", padding: "1rem", borderRadius: '50%'
       }}
     >
       <div id={data.id}>{data.label}</div>
       <Handle
         type="source"
-        position="right"
-        id={`${data.id}.right1`}
-        style={{ top: "50%", borderRadius: 0 }}
+        position="bottom"
+        id={`${data.id}.bottom`}
+        style={{ borderRadius: 0 }}
       />
     </div>
   );
@@ -65,13 +67,13 @@ const EndNode = ({ data }) => {
   return (
     <div
       style={{
-        background: "#9ca8b3", padding: "1rem",borderRadius:'50%'
+        background: "#9ca8b3", padding: "1rem", borderRadius: '50%'
       }}
     >
       <Handle
         type="target"
-        position="left"
-        id={`${data.id}.left`}
+        position="top"
+        id={`${data.id}.top`}
         style={{ borderRadius: "0" }}
       />
       <div id={data.id}>{data.label}</div>
@@ -81,7 +83,7 @@ const EndNode = ({ data }) => {
 
 export const nodeTypes = {
   rectangle: RectangleNode,
-  startNode:StartNode,
-  endNode:EndNode,
-  paraNode:ParaNode
+  startNode: StartNode,
+  endNode: EndNode,
+  paraNode: ParaNode
 };
