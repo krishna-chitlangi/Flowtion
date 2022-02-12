@@ -2,6 +2,7 @@ import Layout from "./Layout"
 import { isAuthenticated } from '../auth'
 import { getCategories,getFlows} from "../user/apiHelper";
 import { useEffect,useState } from "react";
+import Dashboard from "./Dashboard";
 const Home = () => {
     const [categories, setCategories] = useState(false)
     const [flowcharts, setFlowcharts] = useState(false)
@@ -52,10 +53,8 @@ const Home = () => {
             {isAuthenticated() && isAuthenticated().user.role === 0 &&
                     categories && categories.map((fc, i) => {
                         return (<div key={i}>
-        
                             <button key={i} value={fc} onClick={(e) => handleClick(e)} >
                                 {fc}
-        
                             </button>
                             <br></br>
                             <br></br>
@@ -63,7 +62,7 @@ const Home = () => {
                         </div>)
                     })
             }
-            {JSON.stringify(currentFlowChart)}
+            <Dashboard flow={currentFlowChart}></Dashboard>
         </Layout>
 
     )

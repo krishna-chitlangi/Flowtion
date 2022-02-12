@@ -14,6 +14,18 @@ const flowchartSchema = new mongoose.Schema({
     category: {
         type: String,
         default: "category default"
+    },
+    hint:{
+        type:String,
+        default:"No hint provided"
+    },
+    best_time:{
+        type:String,
+        default:Infinity
+    },
+    best_name:{
+        type: String,
+        default:'None'
     }
 }, {
     timestamps: true

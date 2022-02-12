@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-
+import Layout from "../core/Layout"
 import ReactFlow, {
     removeElements,
     updateEdge,
@@ -12,8 +12,8 @@ import ReactFlow, {
 import { nodeTypes } from "../react-flow-renderer/Nodes";
 import { getFlow } from './apiHelper'
 const Displayflow = (props) => {
-    const [elements, setElements] = useState(props.elements);
-    const [answer, setAnswer] = useState(props.elements);
+    const [elements, setElements] = useState([]);
+    const [answer, setAnswer] = useState([]);
     const [arr, setArr] = useState([])
     const [flag, setFlag] = useState(false)
     const [activeNode, setActiveNode] = useState();
@@ -66,10 +66,16 @@ const Displayflow = (props) => {
                     setAnswer(data.nodes)
                     let x = data.nodes;
                     let y = []
-
+                    let q = []
                     for (let i of x) {
-                        if (i.hasOwnProperty("position")) {
+                        if (i.hasOwnProperty("position") ) {
                             y.push(i)
+                        }
+                        else if(i["flg"] === 1){
+                            console.log(i)
+                            q = elements
+                            q.push(i)
+                            
                         }
                         else {
                             let p = arr
@@ -81,12 +87,17 @@ const Displayflow = (props) => {
                     y = shuffle(y)
                     let z = 0
                     for (let i of y) {
-
+                        
                         i["position"]["x"] = 200
                         i["position"]["y"] = 100 * z
                         z++;
                     }
+                    for(let i=0;i<q.length;i++){
+                        y.push(q[i])
+                    }
+                    console.log(y)
                     setElements(y)
+
                 }
             });
     }
@@ -136,7 +147,7 @@ const Displayflow = (props) => {
     };
 
     return (
-        <div>
+        <Layout title="Find the flow">
 
             <div
                 style={{
@@ -198,7 +209,7 @@ const Displayflow = (props) => {
                     </div>
                 }
             </div>
-        </div>
+            </Layout>
     );
 };
 

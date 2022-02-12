@@ -17,11 +17,11 @@ const Menu = (props) => {
             <li className="nav-item">
                 <Link className="nav-link" style={isActive(props.history, '/')} to="/">Home</Link>
             </li>
-            {isAuthenticated() &&
+            {/* {isAuthenticated() &&
                 <li className="nav-item">
                     <Link className="nav-link" style={isActive(props.history, '/dashboard')} to="/dashboard">Dashboard</Link>
                 </li>
-            }
+            } */}
 
 
             {/* {isAuthenticated() && isAuthenticated().user.role === 0 &&

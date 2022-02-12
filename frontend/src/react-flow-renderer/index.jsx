@@ -52,6 +52,66 @@ const ReactFlowRenderer = (props) => {
     });
     setName("");
   };
+  const addDiamondHandler = () => {
+    const newNode = {
+      id: `${Date.now()}`,
+      data: { label: `${name}` },
+      type: "diamond",
+      position: {
+        x: 100,
+        y: 0
+      }
+    };
+    newNode.data = { ...newNode.data, id: `${newNode.id}` };
+
+    const newNode1 = {
+      id: `${Date.now()+1}`,
+      data: { label: `Yes` },
+      type: "rectangle",
+      position: {
+        x: 0,
+        y: 100
+      }
+    };
+    newNode1.data = { ...newNode1.data, id: `${newNode1.id}` };
+
+    const newNode2 = {
+      id: `${Date.now()+2}`,
+      data: { label: `No` },
+      type: "rectangle",
+      position: {
+        x: 200,
+        y: 100
+      }
+    };
+    newNode2.data = { ...newNode2.data, id: `${newNode2.id}` };
+
+
+    const edge1 = {
+        id: `${Date.now()+3}`,
+        source: `${newNode.id}`,
+        // target: '2',
+        sourceHandle: `${newNode.id}.bottom`,
+        target: `${newNode1.id}`,
+        targetHandle: `${newNode1.id}.top`,
+        flg:1
+    }
+
+    const edge2 = {
+      id: `${Date.now()+4}`,
+      source: `${newNode.id}`,
+      sourceHandle: `${newNode.id}.top`,
+      target: `${newNode2.id}`,
+      targetHandle: `${newNode2.id}.top`,
+      flg:1
+    }
+
+    setElements((prev) => {
+      return [...prev, newNode,newNode1,newNode2,edge1,edge2];
+    });
+    console.log(elements)
+    setName("");
+  };
 
   const addParalellogramHandler = () => {
     const newNode = {
@@ -218,7 +278,8 @@ const ReactFlowRenderer = (props) => {
                 case "endNode":
                   return "rgb(0,0,255)";
                 case "paraNode":
-                  return "rgb(120,120,120)"
+                  return "rgb(120,120,120)";
+
                 default:
                   return "#eee";
               }
@@ -247,7 +308,9 @@ const ReactFlowRenderer = (props) => {
           <button type="button" onClick={addEndHandler}>
             Create End Node
           </button>
-
+          <button type="button" onClick={addDiamondHandler}>
+            Create Diamond
+          </button>
         </div>
 
 

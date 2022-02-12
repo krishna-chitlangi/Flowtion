@@ -36,11 +36,11 @@ const Showflow = (props) => {
 
     return (
         <div>
+            <br></br>
+            <br></br>
             Showing flowcharts
-            <br></br>
-            <br></br>
             {/* {JSON.stringify(flowcharts)} */}
-            {flowcharts && flowcharts.map((fc, i) => {
+            {props.flow && props.flow.map((fc, i) => {
                 return (<div key={i}>
 
                     <button key={i} value={fc._id} onClick={(e) => handleClick(e)}>
@@ -52,7 +52,7 @@ const Showflow = (props) => {
 
                 </div>)
             })}
-            {currentFlowChart && JSON.stringify(currentFlowChart)}
+            {/* {currentFlowChart && JSON.stringify(currentFlowChart)} */}
         </div>
     )
 }
