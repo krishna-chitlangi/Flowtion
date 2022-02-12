@@ -1,6 +1,8 @@
+import { useStopwatch } from 'react-timer-hook';
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import Layout from "../core/Layout"
+
 import ReactFlow, {
     removeElements,
     updateEdge,
@@ -10,7 +12,7 @@ import ReactFlow, {
     Controls
 } from "react-flow-renderer";
 import { nodeTypes } from "../react-flow-renderer/Nodes";
-import { getFlow } from './apiHelper'
+import { getFlow, sendTimeData } from './apiHelper'
 const Displayflow = (props) => {
     const [elements, setElements] = useState([]);
     const [answer, setAnswer] = useState([]);
@@ -20,6 +22,15 @@ const Displayflow = (props) => {
     const [clicked, setClicked] = useState(false)
     const [newName, setNewName] = useState("");
     const [instance, setInstance] = useState();
+    const [time,setTime] = useState(1000)
+    const [data,setData] = useState(false)
+    const [button,setButton] = useState(false)
+    const [penal,setPenal]  = useState(0)
+    const [leader,setLeader]  = useState([])
+    const {
+        seconds,
+        minutes,
+      } = useStopwatch({ autoStart: true });
 
     useEffect(() => {
         console.log(props.elements)
@@ -62,7 +73,9 @@ const Displayflow = (props) => {
                 if (data.error) {
 
                 } else {
-                    console.log(data.nodes)
+                    setData(data)
+                    setTime(data.best_time)
+                    console.log(data)
                     setAnswer(data.nodes)
                     let x = data.nodes;
                     let y = []
@@ -88,7 +101,7 @@ const Displayflow = (props) => {
                     let z = 0
                     for (let i of y) {
                         
-                        i["position"]["x"] = 200
+                        i["position"]["x"] = 0
                         i["position"]["y"] = 100 * z
                         z++;
                     }
@@ -141,17 +154,60 @@ const Displayflow = (props) => {
             if (i == arr.length) {
                 console.log("correct")
                 setFlag(true)
+                let w = minutes*60+seconds+penal
+                let u = data.leaderboard
+                let r = JSON.parse(localStorage.getItem('jwt')).user["name"]
+                u.push({name:r,time:w})
+                let o = {
+                    leaderboard:u
+                }
+                sendTimeData(props.match.params.id,o).then(data => {
+                    console.log(data)
+                    
+                    console.log(time>w)
+                    if(time>w){
+                        setTime(w)
+                        let g = {
+                            best_time:w,
+                            best_name:JSON.parse(localStorage.getItem('jwt')).user["name"]
+                        }
+                        sendTimeData(props.match.params.id,g).then(data => {
+                            console.log(data)
+                        })
+                    }      
+                })
             }
         }
 
     };
-
+    const buttonHandler = () =>{
+        setButton(true)
+        alert("You will be penalized")
+        console.log(minutes)
+        setPenal(10)
+    }
+    const leaderHandler = () =>{
+        setLeader(data.leaderboard)
+    }
+    
     return (
         <Layout title="Find the flow">
-
+            <h3>
+                Best Score: {data && data.best_time}<br></br>
+                By:{data && data.best_name}
+            </h3>
+      <h1 style={{marginLeft:'85%'}}>
+          <span>{minutes}</span>:<span>{seconds}</span>
+      </h1>
+      <button onClick={leaderHandler}>Show Leaderboard</button>
+      {
+         JSON.stringify(leader) }
+      <br></br><br></br>
+      <button onClick={buttonHandler}>Show Hint</button>
+      {button && data.hint}
             <div
                 style={{
-                    height: "75vh",
+                    height: "90vh",
                     width: "75vw",
                     border: "1px solid black",
                     marginLeft: "12.5vw"

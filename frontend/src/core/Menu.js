@@ -15,7 +15,7 @@ const Menu = (props) => {
     return (<div>
         <ul className={`nav nav-tabs justify-content-start ${classes.nav}`} style={{ float: 'left', width: '50%', margin: 0, padding: 0 }}>
             <li className="nav-item">
-                <Link className="nav-link" style={isActive(props.history, '/')} to="/">Home</Link>
+                <Link className="nav-link" style={isActive(props.history, '/')} to="/">Dashboard</Link>
             </li>
             {/* {isAuthenticated() &&
                 <li className="nav-item">
