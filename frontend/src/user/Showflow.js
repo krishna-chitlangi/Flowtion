@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { getFlows, getFlow } from "./apiHelper";
-
-const Showflow = () => {
+import { withRouter } from "react-router-dom";
+const Showflow = (props) => {
     const [flowcharts, setFlowcharts] = useState(false)
     const [currentFlowChart, setCurrentFlowChart] = useState(false)
     const init = () => {
@@ -24,9 +24,9 @@ const Showflow = () => {
                 console.log("error occured")
             } else {
                 setCurrentFlowChart(data)
+                console.log(currentFlowChart)
+                props.history.push(`/display/${data._id}`)
             }
-
-
             //  console.log(e.target.value)
             //console.log("clicked ")
         })
@@ -56,4 +56,4 @@ const Showflow = () => {
         </div>
     )
 }
-export default Showflow
+export default withRouter(Showflow)
