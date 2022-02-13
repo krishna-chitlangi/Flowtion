@@ -4,3 +4,8 @@
     border: none;
     
 }
+.signout{
+    color:black;
+}
+.signout:hover{
+    background-color: #131D5A; border-radius: 30px;color:white}

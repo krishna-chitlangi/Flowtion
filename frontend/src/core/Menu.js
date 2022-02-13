@@ -53,8 +53,8 @@ const Menu = (props) => {
                 </React.Fragment>
             }
             {isAuthenticated() &&
-                <li className="nav-item" >
-                    <span className="nav-link" style={{ cursor: 'pointer', color: '#ffffff' }} onClick={
+                <li className="nav-item " >
+                    <span className={`nav-link ${classes.signout}`} style={{ cursor: 'pointer', fontWeight: 'bolder' }} onClick={
                         () =>
                             signout(() => {
                                 props.history.push("/")
