@@ -84,7 +84,7 @@ const Signin = () => {
         <Layout
             title="Signin"
             description="Signin to Flowtion"
-            className="container col-md-8 offset-md-2"
+
         ><div style={{ width: '70%', marginLeft: '10%' }}>
                 {showLoading()}
                 {showError()}

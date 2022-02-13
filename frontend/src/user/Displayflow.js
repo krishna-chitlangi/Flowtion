@@ -11,6 +11,7 @@ import ReactFlow, {
 } from "react-flow-renderer";
 import { nodeTypes } from "../react-flow-renderer/Nodes";
 import { getFlow } from './apiHelper'
+import Layout from "../core/Layout";
 const Displayflow = (props) => {
     const [elements, setElements] = useState(props.elements);
     const [answer, setAnswer] = useState(props.elements);
@@ -136,8 +137,7 @@ const Displayflow = (props) => {
     };
 
     return (
-        <div>
-
+        <Layout title="Flowchart">
             <div
                 style={{
                     height: "75vh",
@@ -198,7 +198,9 @@ const Displayflow = (props) => {
                     </div>
                 }
             </div>
-        </div>
+
+        </Layout >
+
     );
 };
 

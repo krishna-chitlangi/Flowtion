@@ -52,6 +52,23 @@ const ReactFlowRenderer = (props) => {
     });
     setName("");
   };
+  const addDiamondHandler = () => {
+    const newNode = {
+      id: `${Date.now()}`,
+      data: { label: `${name}` },
+      type: "diamond",
+      position: {
+        x: 0,
+        y: 0
+      }
+    };
+    newNode.data = { ...newNode.data, id: `${newNode.id}` };
+
+    setElements((prev) => {
+      return [...prev, newNode];
+    });
+    setName("");
+  };
 
   const addParalellogramHandler = () => {
     const newNode = {
@@ -218,7 +235,8 @@ const ReactFlowRenderer = (props) => {
                 case "endNode":
                   return "rgb(0,0,255)";
                 case "paraNode":
-                  return "rgb(120,120,120)"
+                  return "rgb(120,120,120)";
+
                 default:
                   return "#eee";
               }
@@ -247,7 +265,9 @@ const ReactFlowRenderer = (props) => {
           <button type="button" onClick={addEndHandler}>
             Create End Node
           </button>
-
+          <button type="button" onClick={addDiamondHandler}>
+            Create Diamond
+          </button>
         </div>
 
 
