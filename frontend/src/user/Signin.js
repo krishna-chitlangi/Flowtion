@@ -4,7 +4,8 @@ import Layout from "../core/Layout";
 import { authenticate } from "../auth";
 import { signin } from "../auth";
 import { Redirect } from "react-router-dom";
-
+import Menu from '../core/Menu'
+import classes from './Signup.module.css'
 const Signin = () => {
     const [values, setValues] = useState({
         email: 'test@gmail.com',
@@ -43,15 +44,15 @@ const Signin = () => {
         <form>
 
             <div className="form-group">
-                <label className="text-muted">Email</label>
+                <label style={{ fontWeight: 'bold', color: '#131D5A' }}>Email</label>
                 <input onChange={handleChange('email')} type="email" className="form-control" value={email} />
             </div>
 
             <div className="form-group">
-                <label className="text-muted">Password</label>
+                <label style={{ fontWeight: 'bold', color: '#131D5A' }}>Password</label>
                 <input onChange={handleChange('password')} type="password" className="form-control" value={password} />
             </div>
-            <button onClick={clickSubmit} className="btn btn-dark mt-2">
+            <button onClick={clickSubmit} className={classes.btn}>
                 Submit
             </button>
         </form>
@@ -80,18 +81,28 @@ const Signin = () => {
         }
     }
 
-    return (
-        <Layout
-            title="Signin"
-            description="Signin to Flowtion"
-            className="container col-md-8 offset-md-2"
-        ><div style={{ width: '70%', marginLeft: '10%' }}>
+    return (<div ><Menu>  </Menu>
+        <div style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(5, 0, 255, 0.4)',
+            display: 'flex',
+            flexWrap: 'wrap'
+        }}>
+            <img style={{
+                marginTop: '10%', marginLeft: '15%', marginRight: '12%', borderRadius: '290px'
+            }} height="200px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7Mvq2MGMEzWXPTUfqbqgtlUazwyoOYpB7lA&usqp=CAU"></img>
+
+            <div className={classes.rform}>
                 {showLoading()}
                 {showError()}
+                <div style={{ color: '#131D5A', paddingBottom: '20px' }}>            <h1 >Signin !</h1>
+                </div>
                 {signInForm()}
                 {redirectUser()}
             </div>
-        </Layout >
+        </div>
+    </div>
     )
 }
 

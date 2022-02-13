@@ -3,6 +3,7 @@ import { isAuthenticated } from '../auth'
 import { getCategories,getFlows} from "../user/apiHelper";
 import { useEffect,useState } from "react";
 import Dashboard from "./Dashboard";
+import Menu from "./Menu";
 const Home = () => {
     const [categories, setCategories] = useState(false)
     const [flowcharts, setFlowcharts] = useState(false)
@@ -49,8 +50,12 @@ const Home = () => {
         init();
     }, []);
     return (
-        <Layout title="Welcome to Flowtion" description="..">
-            {isAuthenticated() && isAuthenticated().user.role === 0 &&
+        <div>
+        <Menu></Menu>
+        <div>
+            {/* isAuthenticated() && isAuthenticated().user.role === 0 && */}
+            <div >
+            {
                     categories && categories.map((fc, i) => {
                         return (<div key={i}>
                             <button key={i} value={fc} onClick={(e) => handleClick(e)} >
@@ -62,9 +67,10 @@ const Home = () => {
                         </div>)
                     })
             }
+            </div>
             <Dashboard flow={currentFlowChart}></Dashboard>
-        </Layout>
-
+        </div>
+            </div>
     )
 }
 export default Home;

@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 const NotFound = () => (
     <div>
-        <div style={{ backgroundColor: '#001233' }}>
-            <h1 style={{ color: '#EFE0CA' }}>404 - Not Found!</h1>
+        <div style={{ backgroundColor: 'rgba(5, 0, 255, 0.4)',height:'100vh' }}>
+            <h1 style={{ color: '#131D5A' }}>404 - Not Found!</h1>
         </div>
         <br></br>
         <br></br>

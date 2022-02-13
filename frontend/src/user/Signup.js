@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import Layout from '../core/Layout';
 import { signup, authenticate } from '../auth';
-
+import classes from './Signup.module.css'
+import Menu from '../core/Menu';
 const Signup = () => {
     const [values, setValues] = useState({
         name: '',
@@ -60,26 +61,26 @@ const Signup = () => {
     const signUpForm = () => (
         <form>
             <div className="form-group">
-                <label className="text-muted">Name</label>
-                <input onChange={handleChange('name')} type="text" className="form-control" value={name} />
+                <label style={{ fontWeight: 'bold', color: '#131D5A' }} >Name</label>
+                <input onChange={handleChange('name')} type="text" className="form-control" value={name} style={{ marginBottom: '15px' }} />
             </div>
 
             <div className="form-group">
-                <label className="text-muted">Email</label>
-                <input onChange={handleChange('email')} type="email" className="form-control" value={email} />
+                <label style={{ fontWeight: 'bold', color: '#131D5A' }} >Email</label>
+                <input onChange={handleChange('email')} type="email" className="form-control" value={email} style={{ marginBottom: '15px' }} />
             </div>
 
             <div className="form-group">
-                <label className="text-muted">Password</label>
-                <input onChange={handleChange('password')} type="password" className="form-control" value={password} />
+                <label style={{ fontWeight: 'bold', color: '#131D5A' }} >Password</label>
+                <input onChange={handleChange('password')} type="password" className="form-control" value={password} style={{ marginBottom: '15px' }} />
             </div>
 
             <div className="form-group">
-                <label className="text-muted">Retype Password</label>
-                <input onChange={handlePassword()} type="password" className="form-control" value={retype} />
+                <label style={{ fontWeight: 'bold', color: '#131D5A' }} >Retype Password</label>
+                <input onChange={handlePassword()} type="password" className="form-control" value={retype} style={{ marginBottom: '15px' }} />
             </div>
 
-            <button onClick={clickSubmit} className="btn btn-dark mt-2">
+            <button onClick={clickSubmit} className={classes.btn}>
                 Submit
             </button>
         </form>
@@ -101,18 +102,30 @@ const Signup = () => {
             return <Redirect to="/" />
         }
     }
-    return (
-        <Layout
-            title="Signup"
-            description="Signup to Flowtion"
-            className="container col-md-8 offset-md-2"
-        ><div style={{ width: '70%', marginLeft: '10%' }}>
+    return (<div><Menu>  </Menu>
+        <div style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(5, 0, 255, 0.4)',
+            display: 'flex',
+            flexWrap: 'wrap'
+        }}>
+
+            <img style={{
+                marginTop: '10%', marginLeft: '15%', marginRight: '12%', borderRadius: '290px'
+            }} height="200px" src="https://eligeeducar.cl/content/uploads/2021/10/un-astronauto-viendo-un-documental.jpg"></img>
+
+            < div className={classes.rform} >
+                <div style={{ color: '#131D5A', paddingBottom: '20px' }}>            <h1 >Register!</h1>
+                </div>
+
                 {showLoading()}
                 {showError()}
                 {signUpForm()}
-                {redirectUser()}
             </div>
-        </Layout>
+            {redirectUser()}
+        </div >
+    </div>
     );
 };
 
