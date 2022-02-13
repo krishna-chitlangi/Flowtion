@@ -1,9 +1,10 @@
-import Layout from "./Layout"
 import { isAuthenticated } from '../auth'
 import { getCategories,getFlows} from "../user/apiHelper";
 import { useEffect,useState } from "react";
-import Dashboard from "./Dashboard";
+import ReactFlowRenderer from '../react-flow-renderer';
+import Showflow from '../user/Showflow'
 import Menu from "./Menu";
+import { Redirect } from 'react-router-dom';
 const Home = () => {
     const [categories, setCategories] = useState(false)
     const [flowcharts, setFlowcharts] = useState(false)
@@ -53,9 +54,12 @@ const Home = () => {
         <div>
         <Menu></Menu>
         <div>
-            {/* isAuthenticated() && isAuthenticated().user.role === 0 && */}
+            
             <div >
-            {
+                {
+                    !isAuthenticated() && <Redirect to="/signin"></Redirect>
+                }
+            {   isAuthenticated() && isAuthenticated().user.role === 0 &&
                     categories && categories.map((fc, i) => {
                         return (<div key={i}>
                             <button key={i} value={fc} onClick={(e) => handleClick(e)} >
@@ -68,7 +72,27 @@ const Home = () => {
                     })
             }
             </div>
-            <Dashboard flow={currentFlowChart}></Dashboard>
+            {/* <Dashboard flow={currentFlowChart}></Dashboard> */}
+            {isAuthenticated() && isAuthenticated().user.role === 1 &&
+                // < Layout
+                //     title="Add a flowchart"
+                //     description=""
+                //     className="container col-md-8 offset-md-2"
+                // >
+                    <ReactFlowRenderer />
+
+                // </Layout >
+
+
+            }
+              {isAuthenticated() && isAuthenticated().user.role === 0 && 
+                <div> 
+                    {/* {JSON.stringify(props.flow)} */}
+                    <Showflow flow={currentFlowChart}></Showflow>
+                    {/* <Home></Home> */}
+                
+                 </div>
+              }
         </div>
             </div>
     )

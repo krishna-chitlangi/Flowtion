@@ -1,10 +1,8 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-//import Displayflow from './user/Displayflow';
 
 const Signin = lazy(() => import('./user/Signin'));
 const Signup = lazy(() => import('./user/Signup'));
-const Dashboard = lazy(() => import('./core/Dashboard'));
 const Displayflow = lazy(() => import('./user/Displayflow'));
 const Home = lazy(() => import('./core/Home'));
 const NotFound = lazy(() => import('./core/Notfound'));
@@ -20,7 +18,6 @@ const Routes = () => {
                     <Route path="/signin" exact component={Signin}></Route>
                     <Route path="/signup" exact component={Signup}></Route>
                     <PrivateRoute path="/display/:id" exact component={Displayflow}></PrivateRoute>
-                    <Route path="/dashboard" exact component={Dashboard}></Route>
                     <Route component={NotFound} ></Route>
                 </Switch>
             </Suspense>

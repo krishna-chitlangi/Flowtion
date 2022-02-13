@@ -1,8 +1,9 @@
+//user side flowchart playground to find correct flowchart
+
 import { useStopwatch } from 'react-timer-hook';
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import Layout from "../core/Layout"
-
+import Menu from "../core/Menu"
 import ReactFlow, {
     removeElements,
     updateEdge,
@@ -191,7 +192,8 @@ const Displayflow = (props) => {
     }
     
     return (
-        <Layout title="Find the flow">
+        <div>
+            <Menu></Menu>
             <h3>
                 Best Score: {data && data.best_time}<br></br>
                 By:{data && data.best_name}
@@ -265,7 +267,7 @@ const Displayflow = (props) => {
                     </div>
                 }
             </div>
-            </Layout>
+            </div>
     );
 };
 
