@@ -222,12 +222,14 @@ const ReactFlowRenderer = (props) => {
         } else {
           console.log(data)
           // props.history.push('/')
+          alert("changes saved")
         }
       });
   };
 
   return (
     <div><div>
+      <h1>Create Flow Chart</h1>
       <label>Enter name of your flowchart :</label>
       <input
         value={flowname}
@@ -236,14 +238,13 @@ const ReactFlowRenderer = (props) => {
         placeholder="flowchart name"
       />
       <br></br>
-      <br></br>
       <label>Enter the category  : </label>
       <input
         value={catname}
         onChange={(e) => setcatName(e.target.value)}
         type="text"
         placeholder="category"
-      /><br></br><br></br>
+      /><br></br>
       <label>Enter hint  : </label>
       <input
         value={hint}
@@ -254,13 +255,12 @@ const ReactFlowRenderer = (props) => {
 
     </div>
       <br></br>
-      <br></br>
       <div
         style={{
-          height: "75vh",
-          width: "75vw",
+          height: "87vh",
+          width: "87vw",
           border: "1px solid black",
-          marginLeft: "12.5vw"
+          marginLeft: "6vw"
         }}
       >
 
@@ -277,7 +277,7 @@ const ReactFlowRenderer = (props) => {
           onDoubleClick={clickHandler}
           onLoad={onLoad}
         >
-          <Background variant="dots" gap={15} size={2} color="#c8c8c8" />
+          {/* <Background variant="dots" gap={15} size={2} color="#c8c8c8" /> */}
 
           <MiniMap
             nodeColor={(node) => {
