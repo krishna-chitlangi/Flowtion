@@ -18,7 +18,7 @@ const Routes = () => {
                     <Route path="/signin" exact component={Signin}></Route>
                     <Route path="/signup" exact component={Signup}></Route>
                     <PrivateRoute path="/display/:id" exact component={Displayflow}></PrivateRoute>
-                    <Route path="/dashboard" exact component={Dashboard}></Route>
+                    {/* <Route path="/dashboard" exact component={Dashboard}></Route> */}
                     <Route component={NotFound} ></Route>
                 </Switch>
             </Suspense>

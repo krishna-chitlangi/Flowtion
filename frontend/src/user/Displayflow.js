@@ -14,7 +14,7 @@ import ReactFlow, {
 } from "react-flow-renderer";
 import { nodeTypes } from "../react-flow-renderer/Nodes";
 import { getFlow } from './apiHelper'
-import Layout from "../core/Layout";
+
 const Displayflow = (props) => {
     const [elements, setElements] = useState([]);
     const [answer, setAnswer] = useState([]);
@@ -193,69 +193,68 @@ const Displayflow = (props) => {
     }
 
     return (
-        <Layout title="Flowchart">
-            <div
-                style={{
-                    height: "90vh",
-                    width: "75vw",
-                    border: "1px solid black",
-                    marginLeft: "12.5vw"
-                }}
+
+        <div
+            style={{
+                height: "90vh",
+                width: "75vw",
+                border: "1px solid black",
+                marginLeft: "12.5vw"
+            }}
+        >
+
+            <ReactFlow
+                elements={elements}
+                onConnect={connectHandler}
+                deleteKeyCode={8 || 46}
+                onEdgeUpdate={edgeUpdateHandler}
+                nodeTypes={nodeTypes}
+                snapToGrid={true}
+                snapGrid={[16, 16]}
+                connectionLineStyle={{ stroke: "black", strokeWidth: 2 }}
+                onLoad={onLoad}
             >
+                <Background variant="dots" gap={15} size={2} color="#c8c8c8" />
 
-                <ReactFlow
-                    elements={elements}
-                    onConnect={connectHandler}
-                    deleteKeyCode={8 || 46}
-                    onEdgeUpdate={edgeUpdateHandler}
-                    nodeTypes={nodeTypes}
-                    snapToGrid={true}
-                    snapGrid={[16, 16]}
-                    connectionLineStyle={{ stroke: "black", strokeWidth: 2 }}
-                    onLoad={onLoad}
-                >
-                    <Background variant="dots" gap={15} size={2} color="#c8c8c8" />
+                <MiniMap
+                    nodeColor={(node) => {
+                        switch (node.type) {
+                            case "rectangle":
+                                return "red";
+                            case "startNode":
+                                return "#00ff00";
+                            case "endNode":
+                                return "rgb(0,0,255)";
+                            case "paraNode":
+                                return "rgb(120,120,120)"
+                            default:
+                                return "#eee";
+                        }
+                    }}
+                />
 
-                    <MiniMap
-                        nodeColor={(node) => {
-                            switch (node.type) {
-                                case "rectangle":
-                                    return "red";
-                                case "startNode":
-                                    return "#00ff00";
-                                case "endNode":
-                                    return "rgb(0,0,255)";
-                                case "paraNode":
-                                    return "rgb(120,120,120)"
-                                default:
-                                    return "#eee";
-                            }
-                        }}
-                    />
-
-                    <Controls />
-                </ReactFlow>
+                <Controls />
+            </ReactFlow>
 
 
 
 
-                <button type="button" onClick={saveChangesHandler}>
-                    Save changes
-                </button>
-                {
-                    flag && <div>
-                        correct answer
-                    </div>
-                }
-                {
+            <button type="button" onClick={saveChangesHandler}>
+                Save changes
+            </button>
+            {
+                flag && <div>
+                    correct answer
+                </div>
+            }
+            {
 
-                    !flag && clicked && <div>
-                        wrong answer
-                    </div>
-                }
-            </div>
+                !flag && clicked && <div>
+                    wrong answer
+                </div>
+            }
+        </div>
 
-        </Layout >
 
     );
 };
