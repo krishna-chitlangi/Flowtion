@@ -1,14 +1,17 @@
 import { isAuthenticated } from '../auth'
-import { getCategories,getFlows} from "../user/apiHelper";
+import { getCategories,getFlows} from "./apiHelper";
 import { useEffect,useState } from "react";
 import ReactFlowRenderer from '../react-flow-renderer';
-import Showflow from '../user/Showflow'
-import Menu from "./Menu";
+import Showflow from './Showflow'
+import Menu from "../core/Menu";
 import { Redirect } from 'react-router-dom';
-const Home = () => {
+import ShowLeader from './ShowLeader';
+import ShowFlow1 from './ShowFlow1';
+const Leaderboard = () => {
     const [categories, setCategories] = useState(false)
     const [flowcharts, setFlowcharts] = useState(false)
     const [currentFlowChart, setCurrentFlowChart] = useState([])
+    const [flag,setFlag] = useState(false)
     const init = () => {
         getCategories().then(data => {
             if (data.error) {
@@ -44,6 +47,7 @@ const Home = () => {
             }
         })
         setCurrentFlowChart(x)
+        setFlag(true)
         // console.log(currentFlowChart)
     }
 
@@ -55,10 +59,7 @@ const Home = () => {
             <Menu></Menu>
             <div>
                 {
-                    !isAuthenticated() && <Redirect to="/signin"></Redirect>
-                }
-                {
-                    isAuthenticated() && isAuthenticated().user.role === 0 &&
+                    
                     categories && categories.map((fc, i) => {
                         return (<div key={i}>
                             <button key={i} value={fc} onClick={(e) => handleClick(e)} >
@@ -69,21 +70,12 @@ const Home = () => {
                         </div>)
                     })
                 }
-                {isAuthenticated() && isAuthenticated().user.role === 1 &&
-                    // < Layout
-                    //     title="Add a flowchart"
-                    //     description=""
-                    //     className="container col-md-8 offset-md-2"
-                    // >
-                        <ReactFlowRenderer />
-
-                }
-                {isAuthenticated() && isAuthenticated().user.role === 0 && 
-                        <Showflow flow={currentFlowChart}></Showflow>
+                {flag && 
+                    <ShowFlow1 flow={currentFlowChart}></ShowFlow1>
                 }
             </div>
         </div>
     )
 }
 
-export default Home;
+export default Leaderboard;

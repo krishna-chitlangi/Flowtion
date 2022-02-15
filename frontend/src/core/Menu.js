@@ -23,7 +23,9 @@ const Menu = (props) => {
                 </li>
             } */}
 
-
+        <li className="nav-item">
+                <Link className="nav-link mt-3" style={isActive(props.history, '/leaderboard')} to="/leaderboard">Leaderboard</Link>
+        </li>
 
 
         </ul>
