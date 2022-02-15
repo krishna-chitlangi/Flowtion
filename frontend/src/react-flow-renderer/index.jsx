@@ -1,3 +1,5 @@
+//admin side to create flowchart
+
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 
@@ -22,6 +24,7 @@ const ReactFlowRenderer = (props) => {
   const [activeNode, setActiveNode] = useState();
   const [newName, setNewName] = useState("");
   const [instance, setInstance] = useState();
+  const [hint, setHint] = useState("");
 
   useEffect(() => {
     if (activeNode) setNewName(activeNode.data.label);
@@ -168,13 +171,14 @@ const ReactFlowRenderer = (props) => {
     x["nodes"] = instance.getElements()
     x["name"] = flowname
     x["category"] = catname
+    x["hint"] = hint
     saveFlow(JSON.stringify(x))
       .then(data => {
         if (data.error) {
 
         } else {
           console.log(data)
-          props.history.push('/')
+          // props.history.push('/')
         }
       });
   };
@@ -196,6 +200,13 @@ const ReactFlowRenderer = (props) => {
         onChange={(e) => setcatName(e.target.value)}
         type="text"
         placeholder="category"
+      /><br></br><br></br>
+      <label>Enter hint  : </label>
+      <input
+        value={hint}
+        onChange={(e) => setHint(e.target.value)}
+        type="text"
+        placeholder="hint"
       />
 
     </div>

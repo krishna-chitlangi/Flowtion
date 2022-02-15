@@ -17,27 +17,13 @@ const Menu = (props) => {
             <li className="nav-item">
                 <Link className="nav-link" style={isActive(props.history, '/')} to="/"><img height="80px" src="https://www.logomaker.com/api/main/images/1j+ojFVDOMkX9Wytexe43D6khvGCpB5Lmh3NwXs1M3EMoAJtliQpgfRu9...8y"></img></Link>
             </li>
-            {isAuthenticated() &&
+            {/* {isAuthenticated() &&
                 <li className="nav-item">
                     <Link className="nav-link" style={isActive(props.history, '/dashboard')} to="/dashboard">Dashboard</Link>
                 </li>
-            }
-
-
-            {/* {isAuthenticated() && isAuthenticated().user.role === 0 &&
-                (
-                    <li className="nav-item">
-                        <Link className="nav-link" style={isActive(props.history, "/user/dashboard")} to="/user/dashboard">Dashboard</Link>
-                    </li>
-                )
-            }
-            {isAuthenticated() && isAuthenticated().user.role === 1 &&
-                (
-                    <li className="nav-item">
-                        <Link className="nav-link" style={isActive(props.history, "/admin/dashboard")} to="/admin/dashboard">Dashboard</Link>
-                    </li>
-                )
             } */}
+
+
 
 
         </ul>

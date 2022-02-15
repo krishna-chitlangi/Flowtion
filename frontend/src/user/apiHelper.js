@@ -12,6 +12,23 @@ export const getFlows = (token) => {
         .catch(err => console.log(err));
 };
 
+export const sendTimeData = (id,data) => {
+    return fetch(`${API}/update/${id}`, {
+        method: 'PATCH',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+
 export const getCategories = (token) => {
     return fetch(`${API}/readAllCat`, {
         method: 'GET',

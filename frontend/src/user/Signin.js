@@ -1,6 +1,5 @@
 import { isAuthenticated } from "../auth";
 import { useState } from "react";
-import Layout from "../core/Layout";
 import { authenticate } from "../auth";
 import { signin } from "../auth";
 import { Redirect } from "react-router-dom";

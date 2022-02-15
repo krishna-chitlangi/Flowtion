@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import Layout from '../core/Layout';
 import { signup, authenticate } from '../auth';
 import classes from './Signup.module.css'
 import Menu from '../core/Menu';

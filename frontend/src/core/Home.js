@@ -1,7 +1,10 @@
-import Layout from "./Layout"
 import { isAuthenticated } from '../auth'
 import { getCategories,getFlows} from "../user/apiHelper";
 import { useEffect,useState } from "react";
+import ReactFlowRenderer from '../react-flow-renderer';
+import Showflow from '../user/Showflow'
+import Menu from "./Menu";
+import { Redirect } from 'react-router-dom';
 const Home = () => {
     const [categories, setCategories] = useState(false)
     const [flowcharts, setFlowcharts] = useState(false)
@@ -48,14 +51,19 @@ const Home = () => {
         init();
     }, []);
     return (
-        <Layout title="Welcome to Flowtion" description="..">
-            {isAuthenticated() && isAuthenticated().user.role === 0 &&
+        <div>
+        <Menu></Menu>
+        <div>
+            
+            <div >
+                {
+                    !isAuthenticated() && <Redirect to="/signin"></Redirect>
+                }
+            {   isAuthenticated() && isAuthenticated().user.role === 0 &&
                     categories && categories.map((fc, i) => {
                         return (<div key={i}>
-        
                             <button key={i} value={fc} onClick={(e) => handleClick(e)} >
                                 {fc}
-        
                             </button>
                             <br></br>
                             <br></br>
@@ -63,9 +71,30 @@ const Home = () => {
                         </div>)
                     })
             }
-            {JSON.stringify(currentFlowChart)}
-        </Layout>
+            </div>
+            {/* <Dashboard flow={currentFlowChart}></Dashboard> */}
+            {isAuthenticated() && isAuthenticated().user.role === 1 &&
+                // < Layout
+                //     title="Add a flowchart"
+                //     description=""
+                //     className="container col-md-8 offset-md-2"
+                // >
+                    <ReactFlowRenderer />
 
+                // </Layout >
+
+
+            }
+              {isAuthenticated() && isAuthenticated().user.role === 0 && 
+                <div> 
+                    {/* {JSON.stringify(props.flow)} */}
+                    <Showflow flow={currentFlowChart}></Showflow>
+                    {/* <Home></Home> */}
+                
+                 </div>
+              }
+        </div>
+            </div>
     )
 }
 export default Home;

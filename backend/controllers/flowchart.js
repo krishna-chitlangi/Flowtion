@@ -11,6 +11,25 @@ const saveflow = async (req, res) => {
         })
     }
 }
+
+const updateFlow = async (req, res) => {
+    const updates = Object.keys(req.body)
+    const id = req.params.id;
+    let flowchart = await Flowchart.findById(id)
+    console.log(req.body['best_time'])
+    try {
+        updates.forEach((update) => flowchart[update] = req.body[update])
+        console.log(flowchart)
+        await flowchart.save()
+        res.status(201).send(flowchart)
+    } catch (err) {
+        return res.status(400).json({
+            error: err
+        })
+    }
+}
+
+
 const read = async (req, res) => {
     try {
         const id = req.params.id;
@@ -64,4 +83,4 @@ const readAllCat = async (req, res) => {
 
     }
 }
-module.exports = { read, readAll,readAllCat, saveflow }
+module.exports = { read, readAll,readAllCat, saveflow,updateFlow }
